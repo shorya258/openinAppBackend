@@ -1,9 +1,9 @@
 const express = require("express");
 const router = express.Router();
-const profile = require("../models/newProfile");
+var Profile = require("../models/profile");
 router.post("/profileData", async (req, res) => {
   let data = req.body.profile_data;
-  let eId = await profile.findOne({ email: req.body.email });
+  let eId = await Profile.findOne({ email: req.body.email });
   console.log(eId);
   if (eId === null) {
     try {
@@ -21,7 +21,7 @@ router.post("/profileData", async (req, res) => {
     }
   } else {
     try {
-      await profile
+      await Profile
         .findOneAndUpdate({ email: req.body.email }, { profile_data: data })
         .then(() => {
           res.json({ success: true });

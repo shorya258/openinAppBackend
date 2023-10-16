@@ -1,9 +1,9 @@
 const express = require("express");
 const router = express.Router();
-const profile = require("../Models/newProfile");
+var Profile = require("../models/profile");
 router.post("/findProfileByEmail", async (req, res) => {
   try {
-    let foundProfile = await profile.findOne({ email: req.body.email });
+    let foundProfile = await Profile.findOne({ email: req.body.email });
     if (foundProfile == null) {
       res.json(null);
     } else {
