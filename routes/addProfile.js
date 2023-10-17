@@ -7,25 +7,24 @@ router.post("/profileData", async (req, res) => {
   console.log(eId);
   if (eId === null) {
     try {
-      await profile
-        .create({
-          email: req.body.email,
-          profile_data: data,
-        })
-        .then(() => {
-          res.json({ success: true });
-        });
+      await Profile.create({
+        email: req.body.email,
+        profile_data: data,
+      }).then(() => {
+        res.json({ success: true });
+      });
     } catch (error) {
       console.log(error.message);
       res.send("Server Error", error.message);
     }
   } else {
     try {
-      await Profile
-        .findOneAndUpdate({ email: req.body.email }, { profile_data: data })
-        .then(() => {
-          res.json({ success: true });
-        });
+      await Profile.findOneAndUpdate(
+        { email: req.body.email },
+        { profile_data: data }
+      ).then(() => {
+        res.json({ success: true });
+      });
     } catch (error) {
       res.send("Server Error", error.message);
     }
